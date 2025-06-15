@@ -7,15 +7,15 @@ from langchain.embeddings import OpenAIEmbeddings
 from qdrant_client import QdrantClient
 from langchain_community.vectorstores import Qdrant as QdrantVectorStore
 from openai import OpenAI
-from dotenv import load_dotenv
 import tempfile
-import os
 
-# Load environment variables
-load_dotenv()
+
+import os
+os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+
 
 # Instantiate OpenAI client
-client = OpenAI()
+client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
 # Initialize embedding model
 embedding_model = OpenAIEmbeddings(model="text-embedding-3-large")
