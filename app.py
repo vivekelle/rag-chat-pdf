@@ -48,9 +48,11 @@ if uploaded_file:
             qdrant = QdrantVectorStore.from_documents(
                 documents=chunks,
                 embedding=embedding_model,
-                url="http://localhost:6333",
+                url=st.secrets["QDRANT_URL"],
+                api_key=st.secrets["QDRANT_API_KEY"],
                 collection_name="learning_vectors",
                 force_recreate=True
+    
             )
 
             st.session_state.vector_db = qdrant
